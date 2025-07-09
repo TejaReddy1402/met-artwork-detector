@@ -1,4 +1,5 @@
-streamlit
-pillow
-# ultralytics is now upgraded by the Dockerfile, so you can remove the version pin here
-# If you want to keep it, it won't hurt, but the explicit upgrade will override it.
+streamlit==1.46.1
+ultralytics==8.0.196
+pillow==10.3.0
+torch==2.3.1+cpu # Explicitly install CPU version of PyTorch
+torchvision==0.18.1+cpu # Often a good idea to include torchvision with torch
