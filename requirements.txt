@@ -1,0 +1,4 @@
+streamlit
+pillow
+# ultralytics is now upgraded by the Dockerfile, so you can remove the version pin here
+# If you want to keep it, it won't hurt, but the explicit upgrade will override it.
