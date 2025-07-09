@@ -1,5 +1,5 @@
 streamlit==1.46.1
 ultralytics==8.0.196
 pillow==10.3.0
-torch==2.3.1+cpu # Explicitly install CPU version of PyTorch
-torchvision==0.18.1+cpu # Often a good idea to include torchvision with torch
+torch==2.3.1          # Removed +cpu
+torchvision==0.18.1   # Removed +cpu
