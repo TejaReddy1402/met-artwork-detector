@@ -52,7 +52,7 @@ My Drive/
     │       └── artwork_detection_hf_run1/ # My specific training run folder
     │           └── weights/
     │               └── best.pt   # The trained model weights I used for deployment
-    └── yolo_weights/             # (Optional) I also kept base YOLO models here
+    └── yolo_weights/             # I also kept base YOLO models here
 
 Local Project Structure (for Render Deployment)
 For deployment, I prepared a clean local folder that I then pushed to GitHub:
@@ -105,7 +105,7 @@ results = model.train(
     epochs=50,
     imgsz=640,
     batch=-1,
-    name='artwork_detection_hf_run1', # I named this specific training run
+    name='artwork_detection_hf_run1',
     project=YOLO_RUNS_DIR.as_posix()
 )
 
