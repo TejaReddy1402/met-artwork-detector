@@ -8,7 +8,7 @@ import sys
 import traceback # Import the traceback module for detailed error logging
 
 # --- Configuration ---
-# MODEL_PATH is now relative to the app.py file within the Hugging Face Space
+# MODEL_PATH is now relative to the app.py file
 MODEL_PATH = "best.pt" 
 
 # --- Load Model ---
