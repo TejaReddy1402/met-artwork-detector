@@ -103,4 +103,4 @@ if uploaded_file is not None:
         st.code(traceback.format_exc())
 
 st.markdown("---")
-st.markdown("Developed by SmartMuseumGuide Team")
+st.markdown("Developed by Teja Reddy")
