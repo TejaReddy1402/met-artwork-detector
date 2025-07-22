@@ -1,6 +1,56 @@
 import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
+import numpy as np
+import io
+
+# --- Custom CSS for Background Image ---
+# Replace 'YOUR_MUSEUM_IMAGE_URL_HERE' with the actual URL of your museum image
+# Example placeholder URL: https://placehold.co/1920x1080/f0f0f0/333333/png?text=Museum+Background
+# For a real image, find a high-resolution, publicly accessible URL.
+# Consider images from Wikimedia Commons or the Met Museum's open access collection if linkable.
+background_image_url = "https://placehold.co/1920x1080/f0f0f0/333333/png?text=Museum+Background" 
+
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("c:\Users\tejak\my-artwork-detector-hf\Background.png");
+        background-size: cover; /* Cover the entire area */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-attachment: fixed; /* Keep the image fixed when scrolling */
+    }}
+    /* Optional: Add a semi-transparent overlay to improve text readability */
+    .stApp::before {{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); /* Black overlay with 30% opacity */
+        z-index: -1; /* Place behind content */
+    }}
+    /* Optional: Adjust text color for better contrast on a dark background */
+    body {{
+        color: #333333; /* Dark text for light background */
+    }}
+    .stSidebar, .stFileUploader, .stSlider, .stButton button {{
+        background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white for sidebar elements */
+        border-radius: 10px;
+        padding: 10px;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# --- Your existing Streamlit app code starts here ---
+st.title("🖼️ Met Museum Artwork Detector")
+# ... rest of your streamlit_app.py code ...import streamlit as st
+from ultralytics import YOLO
+from PIL import Image
 import io
 import numpy as np
 import os
@@ -103,4 +153,4 @@ if uploaded_file is not None:
         st.code(traceback.format_exc())
 
 st.markdown("---")
-st.markdown("Developed by SmartMuseumGuide Team")
+st.markdown("Developed by Teja Reddy")
