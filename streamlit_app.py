@@ -9,13 +9,13 @@ import io
 # Example placeholder URL: https://placehold.co/1920x1080/f0f0f0/333333/png?text=Museum+Background
 # For a real image, find a high-resolution, publicly accessible URL.
 # Consider images from Wikimedia Commons or the Met Museum's open access collection if linkable.
-background_image_url = "https://placehold.co/1920x1080/f0f0f0/333333/png?text=Museum+Background" 
+background_image_url = "c:\Users\tejak\my-artwork-detector-hf\Background.png" 
 
 st.markdown(
     f"""
     <style>
     .stApp {{
-        background-image: url("c:\Users\tejak\my-artwork-detector-hf\Background.png");
+        background-image: url("{background_image_url}");
         background-size: cover; /* Cover the entire area */
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
