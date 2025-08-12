@@ -3,6 +3,8 @@ import streamlit as st
 from PIL import Image
 from ultralytics import YOLO
 import io
+import sys
+import traceback # Import the traceback module for detailed error logging
 
 # --- App Configuration ---
 # Set the page title and icon
@@ -30,7 +32,12 @@ try:
     model = YOLO("best.pt")
     st.sidebar.success("Model loaded successfully!")
 except Exception as e:
+    # Print a user-friendly error message
     st.sidebar.error(f"Error loading model: {e}")
+    # Print the full traceback to the Streamlit logs for debugging
+    st.error("Full traceback for model loading error:")
+    st.code(traceback.format_exc())
+    # This will stop the app from running further, which is intended in this case
     st.stop()
 
 # Create sliders for confidence and IoU thresholds
@@ -49,34 +56,40 @@ uploaded_file = st.file_uploader(
 
 # Process the image if one is uploaded
 if uploaded_file is not None:
-    # Display the uploaded image
-    st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
-    st.write("")
-    st.write("Detecting...")
+    try:
+        # Display the uploaded image
+        st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
+        st.write("")
+        st.write("Detecting...")
 
-    # Open the image using Pillow and run the model
-    image = Image.open(uploaded_file)
+        # Open the image using Pillow and run the model
+        image = Image.open(uploaded_file)
 
-    # Convert image to bytes
-    img_bytes = io.BytesIO()
-    image.save(img_bytes, format='PNG')
-    img_bytes.seek(0)
-    
-    # Perform detection with the specified thresholds
-    results = model.predict(
-        source=img_bytes,
-        conf=confidence,
-        iou=iou,
-        save=False  # Do not save the results to disk
-    )
+        # Convert image to bytes
+        img_bytes = io.BytesIO()
+        image.save(img_bytes, format='PNG')
+        img_bytes.seek(0)
+        
+        # Perform detection with the specified thresholds
+        results = model.predict(
+            source=img_bytes,
+            conf=confidence,
+            iou=iou,
+            save=False  # Do not save the results to disk
+        )
 
-    # Get the detected image with bounding boxes
-    if results and results[0].boxes:
-        detected_image = Image.fromarray(results[0].plot()[:, :, ::-1])
-        st.image(detected_image, caption="Artwork Detected!", use_column_width=True)
-    else:
-        st.warning("No artworks were detected in the image with the current settings.")
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+        # Get the detected image with bounding boxes
+        if results and results[0].boxes:
+            detected_image = Image.fromarray(results[0].plot()[:, :, ::-1])
+            st.image(detected_image, caption="Artwork Detected!", use_column_width=True)
+        else:
+            st.warning("No artworks were detected in the image with the current settings.")
+            st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    st.success("Detection complete!")
+        st.success("Detection complete!")
+    except Exception as e:
+        # Catch and log any errors that happen during the detection process
+        st.error(f"An unexpected error occurred during inference: {e}")
+        st.error("Full traceback for inference error:")
+        st.code(traceback.format_exc())
 
