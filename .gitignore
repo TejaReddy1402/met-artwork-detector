@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+venv/
+.venv/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# ML artifacts (add new weights here; best.pt is intentionally tracked for Render deploy)
+runs/
+wandb/
+*.log
+
+# Data
+data/
+datasets/
+
+# Claude Code
+.claude/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
